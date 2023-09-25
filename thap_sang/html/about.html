@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Về CLB</title>
+    <link rel="icon" href="/img/logo_ts.png">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
+    <link rel="stylesheet" href="../css/animate.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+        integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="../css/style.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css"
+        integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.all.min.js"></script>
+    <style>
+        #showMoreBtn {
+            background-color: lightcoral;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+
+        #showMoreBtn:hover {
+            background-color: #eb2f2d;
+        }
+
+        .dropdown-item.active,
+        .dropdown-item:active {
+            color: #fff;
+            text-decoration: none;
+            background-color: lightcoral !important;
+        }
+
+        .bg-light {
+            background-color: #F69C9B !important;
+            color: white !important;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg" id="top">
+        <div class="container"> <a class="navbar-brand navbar-logo" href="../index.html"> <img style="width: 200px;
+                                                                                         height: 50px"
+                    src="images/logo.png" alt="logo" class="logo-1"> </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"> <span
+                    class="fas fa-bars"></span> </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item"> <a class="nav-link" href="../index.html">Trang chủ</a> </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="skillDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Kỹ năng
+                        </a>
+                        <div class="dropdown-menu list_menu" aria-labelledby="skillDropdown">
+                            <!-- Thêm các mục con vào đây -->
+                            <a class="dropdown-item" href="morse.html">Morse</a>
+                            <hr>
+                            <a class="dropdown-item " href="semaphore.html">Semaphore</a>
+                            <hr>
+                            <a class="dropdown-item" href="#">Gút dây</a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="skillDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Mật thư
+                        </a>
+                        <div class="dropdown-menu list_menu" aria-labelledby="skillDropdown">
+                            <!-- Thêm các mục con vào đây -->
+                            <a class="dropdown-item " href="cam_ranh.html">Cam ranh</a>
+                            <hr>
+                            <a class="dropdown-item" href="thay_the.html">Thay thế</a>
+
+                        </div>
+                    </li>
+                    <!--<li class="nav-item"> <a class="nav-link" href="@{/mat_thu}">Mật thư</a> </li>-->
+                    <li class="nav-item"> <a class="nav-link selected" href="about.html">Về CLB_TS</a> </li>
+
+
+                    <li class="nav-item"> <a class="nav-link" href="contact.html">Liên hệ</a> </li>
+                    <p th:text="${get}"></p>
+                    <li class="nav-item" id="logoutContainer">
+
+                        <button id="logoutButton" class="btn btn-primary customStyle-btn-primary " type="submit"></i>
+                            Đăng xuất </button>
+                    </li>
+                    <script>
+                        
+                        var _0x71b8=["\x69\x73\x4C\x6F\x67\x67\x65\x64\x49\x6E","\x67\x65\x74\x49\x74\x65\x6D","\x6C\x6F\x67\x6F\x75\x74\x43\x6F\x6E\x74\x61\x69\x6E\x65\x72","\x67\x65\x74\x45\x6C\x65\x6D\x65\x6E\x74\x42\x79\x49\x64","\x64\x69\x73\x70\x6C\x61\x79","\x73\x74\x79\x6C\x65","\x62\x6C\x6F\x63\x6B","\x6E\x6F\x6E\x65"];const isLoggedIn=localStorage[_0x71b8[1]](_0x71b8[0]);const logoutContainer=document[_0x71b8[3]](_0x71b8[2]);if(isLoggedIn){logoutContainer[_0x71b8[5]][_0x71b8[4]]= _0x71b8[6]}else {logoutContainer[_0x71b8[5]][_0x71b8[4]]= _0x71b8[7]}
+                    </script>
+
+                    <script>
+
+var _0x19af=["\x63\x6C\x69\x63\x6B","\x69\x73\x4C\x6F\x67\x67\x65\x64\x49\x6E","\x72\x65\x6D\x6F\x76\x65\x49\x74\x65\x6D","\x68\x72\x65\x66","\x6C\x6F\x63\x61\x74\x69\x6F\x6E","\x2E\x2E\x2F\x69\x6E\x64\x65\x78\x2E\x68\x74\x6D\x6C","\x61\x64\x64\x45\x76\x65\x6E\x74\x4C\x69\x73\x74\x65\x6E\x65\x72","\x6C\x6F\x67\x6F\x75\x74\x42\x75\x74\x74\x6F\x6E","\x67\x65\x74\x45\x6C\x65\x6D\x65\x6E\x74\x42\x79\x49\x64"];document[_0x19af[8]](_0x19af[7])[_0x19af[6]](_0x19af[0],function(){localStorage[_0x19af[2]](_0x19af[1]);window[_0x19af[4]][_0x19af[3]]= _0x19af[5]})
+                    </script>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    
+    <!-------Banner Start------->
+    <section class="banner" data-scroll-index='0'>
+        <div class="banner-overlay">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 col-sm-12">
+                        <div class="banner-text">
+                            <h3 style="text-transform: uppercase" class="white">Câu lạc bộ kỹ năng - Thắp Sáng</h3>
+
+                            <h6 class="white"><i>Sống với đam mê - Cháy cùng nhiệt huyết</i></h6>
+
+                            <ul class="banner-text white" style="padding-bottom: 50px">
+                                <li><a href="../html/semaphore.html"><img src="/images/semaphore.png" class="wow fadeInUp"
+                                            data-wow-delay="0.4s" /></a></li>
+                                <li><a href="../html/morse.html"><img src="/images/morse.png" class="wow fadeInUp"
+                                            data-wow-delay="0.7s" /></a></li>
+                                <li><a href="#"><img src="/images/gutday.png" class="wow fadeInUp"
+                                            data-wow-delay="0.9s" /></a></li>
+
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-12"> <img src="../img/logo_ts.png" class="img-fluid wow fadeInUp" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <span class="svg-wave"> <img class="svg-hero" src="/images/applight-wave.svg"> </span>
+    </section>
+
+    <!-- content -->
+
+    <section class="about section-padding prelative" data-scroll-index='1'>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="sectioner-header text-center">
+                        <h3>Thắp Sáng</h3>
+                        <span class="line"></span>
+                        <p>CLB Kỹ năng Thắp Sáng đã được thành lập vào ngày 13/7/2017, dưới sự chủ nhiệm của anh Phan Quốc Cường. Chúng tôi tự hào là một nơi thú vị và sáng tạo, nơi bạn có cơ hội khám phá và phát triển các kỹ năng độc đáo như Semaphore, Morse, Gút dây và nhiều kỹ năng khác. Chúng tôi là một cộng đồng đam mê đến từ nhiều lĩnh vực và độ tuổi khác nhau, nhưng chúng tôi có điểm chung là niềm đam mê với việc học hỏi và thực hành các kỹ năng đặc biệt.
+                        </p>
+                    </div>
+                    <div class="section-content text-center">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="icon-box wow fadeInUp" data-wow-delay="0.2s"> <img src="/images/semaphore.png" class="wow fadeInUp ky_nang" data-wow-delay="0.4s"/></i>
+                                    <h5>Semaphore</h5>
+                                    <p><b>Semaphore</b> - Học cách sử dụng cử chỉ và tín hiệu đèn để truyền thông tin và giao tiếp một cách hiệu quả, giống như những người lính trên tàu chiến thời chiến tranh thế giới.</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="icon-box wow fadeInUp" data-wow-delay="0.4s"><img src="/images/morse.png" class="wow fadeInUp ky_nang" data-wow-delay="0.7s"/></i>
+                                    <h5>Morse</h5>
+                                    <p><b>Morse</b> - Khám phá thế giới của ngôn ngữ Morse, hệ thống truyền thông bằng âm thanh và ánh sáng, và làm quen với việc gửi và nhận các thông điệp bằng mã Morse.</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="icon-box wow fadeInUp" data-wow-delay="0.6s"><img src="/images/gutday.png" class="wow fadeInUp ky_nang" data-wow-delay="0.9s"/></i>
+                                    <h5>Gút dây</h5>
+                                    <p><b>Gút dây</b> - Học cách thắt nút, làm việc với dây thừng, và tạo ra các giải pháp sáng tạo từ vật liệu đơn giản như dây thừng.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="#" class="about-btn">Xem thêm</a> </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="download section-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="sectioner-header text-center white">
+                        <img style="width: 200px;
+                                                                            height: 50px" src="/images/logo.png"
+                            alt="logo" class="logo-1">
+                        <span class="line"></span>
+                        <p class="white">Sống với đam mê - Cháy cùng nhiệt huyết</p>
+                        <p class="white">Thắp sáng cho tôi - Thắp sáng cho bạn</p>
+                        <p class="white">Và niềm tin thắp sáng Việt Nam</p>
+
+
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="section-content text-center">
+                        <img src="/img/logo_ts.png" class="img-fluid wow fadeInUp" />
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-------Download End------->
+
+    <footer class="footer-copy">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <p>2023 &copy; Applight. Website Designed by <span style="color: red"> Thắp Sáng</span></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!--<div class="loader"></div>-->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"
+        integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
+    <!-- scrollIt js -->
+    <script src="../js/scrollIt.min.js"></script>
+    <script src="../js/wow.min.js"></script>
+
+    <script>
+        wow = new WOW();
+        wow.init();
+        $(document).ready(function (e) {
+
+            $('#video-icon').on('click', function (e) {
+                e.preventDefault();
+                $('.video-popup').css('display', 'flex');
+                $('.iframe-src').slideDown();
+            });
+            $('.video-popup').on('click', function (e) {
+                var $target = e.target.nodeName;
+                var video_src = $(this).find('iframe').attr('src');
+                if ($target != 'IFRAME') {
+                    $('.video-popup').fadeOut();
+                    $('.iframe-src').slideUp();
+                    $('.video-popup iframe').attr('src', " ");
+                    $('.video-popup iframe').attr('src', video_src);
+                }
+            });
+
+            $('.slider').bxSlider({
+                pager: false
+            });
+        });
+
+        $(window).on("scroll", function () {
+
+            var bodyScroll = $(window).scrollTop(),
+                navbar = $(".navbar");
+
+            if (bodyScroll > 50) {
+                $('.navbar-logo img').attr('src', '/images/logo-black.png');
+                navbar.addClass("nav-scroll");
+
+            } else {
+                $('.navbar-logo img').attr('src', '/images/logo.png');
+                navbar.removeClass("nav-scroll");
+            }
+
+        });
+        $(window).on("load", function () {
+            var bodyScroll = $(window).scrollTop(),
+                navbar = $(".navbar");
+
+            if (bodyScroll > 50) {
+                $('.navbar-logo img').attr('src', '/images/logo-black.png');
+                navbar.addClass("nav-scroll");
+            } else {
+                $('.navbar-logo img').attr('src', '/images/logo-white.png');
+                navbar.removeClass("nav-scroll");
+            }
+
+            $.scrollIt({
+
+                easing: 'swing', // the easing function for animation
+                scrollTime: 900, // how long (in ms) the animation takes
+                activeClass: 'active', // class given to the active nav element
+                onPageChange: null, // function(pageIndex) that is called when page is changed
+                topOffset: -63
+            });
+        });
+
+    </script>
+</body>
+
+</html>
