@@ -607,6 +607,12 @@ input {
     }
 }
 @media all and (max-width:768px) {
+    #quy_tac > tbody > tr > th{
+        font-size: 15px;
+    }
+    #quy_tac > tbody > tr > td{
+        font-size: 15px;
+    }
 
     .letter_morse > tr > td > span{
         font-size: 18px;
@@ -951,6 +957,7 @@ table.table-bordered > tbody > tr > td{
         margin: 30px 20px;
         padding: 40px 15px 15px 15px;
     }
+    
 }
 
 textarea {
