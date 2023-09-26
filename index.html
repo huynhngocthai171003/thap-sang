@@ -18,6 +18,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.all.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.carousel.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.theme.min.css">
+    <link href="https://use.fontawesome.com/releases/v5.0.1/css/all.css" rel="stylesheet">
+
     <style>
         #showMoreBtn {
             background-color: lightcoral;
@@ -38,14 +43,160 @@
             background-color: lightcoral !important;
         }
 
-       
+        .testimonial {
+            margin: 0 10px;
+        }
 
+        .testimonial .testimonial-content {
+            margin: 20px 0 50px 0;
+            position: relative;
+        }
+
+        .testimonial .testimonial-content:after {
+            content: "";
+            width: 20px;
+            height: 20px;
+            border-top: 20px solid #EF6A5A;
+            border-left: 20px solid transparent;
+            border-right: 20px solid transparent;
+            margin: 0 auto;
+            position: absolute;
+            bottom: -20px;
+            left: 0;
+            right: 0;
+        }
+
+        .testimonial .description {
+            padding: 25px 35px;
+            margin: 0;
+            background: #EF6A5A;
+            border-radius: 15px;
+            font-size: 20px;
+            color: #fff;
+            position: relative;
+        }
+
+        .testimonial .description:before,
+        .testimonial .description:after {
+            /* content: "\f2b9"; */
+            font-family: "Font Awesome 5 Free";
+            font-weight: 900;
+            width: 35px;
+            height: 35px;
+            line-height: 35px;
+            border-radius: 8px;
+            text-align: center;
+            background: #EF6A5A;
+            position: absolute;
+        }
+
+        .testimonial .description:before {
+            content: "\f10d";
+            top: -18px;
+            left: 25px;
+        }
+
+        .testimonial .description:after {
+            content: "\f10e";
+            bottom: -18px;
+            right: 25px;
+        }
+
+        .testimonial .testimonial-profile {
+            display: table;
+            padding: 15px;
+            border: 1px solid #EF6A5A;
+            border-radius: 20px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .testimonial .pic {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 1px solid #EF6A5A;
+            float: left;
+            overflow: hidden;
+        }
+
+        .testimonial .title {
+            display: inline-block;
+            margin: 0 0 0 30px;
+            font-size: 19px;
+            font-weight: bold;
+            color: #EF6A5A;
+            position: relative;
+            top: 22px;
+        }
+
+        .testimonial .title:before {
+            content: "";
+            width: 1px;
+            height: 70px;
+            background: #EF6A5A;
+            position: absolute;
+            top: -8px;
+            left: -15px;
+        }
+
+        .testimonial .post {
+            display: block;
+            font-size: 14px;
+            font-weight: normal;
+            color: #888;
+            margin-top: 10px;
+        }
+
+        .owl-theme .owl-controls {
+            margin-top: 30px;
+        }
+
+        .owl-theme .owl-controls .owl-page span {
+            background: transparent;
+            border: 1px solid #EF6A5A;
+            opacity: 1;
+        }
+
+        .owl-theme .owl-controls .owl-page.active span {
+            background: #EF6A5A;
+            border: 1px solid #EF6A5A;
+        }
+
+        @media only screen and (max-width: 479px) {
+            .testimonial .description {
+                padding: 20px;
+                font-size: 16px;
+            }
+
+            .testimonial .testimonial-profile {
+                padding: 10px;
+            }
+
+            .testimonial .title {
+                font-size: 16px;
+            }
+
+            .testimonial .post {
+                font-size: 13px;
+            }
+        }
+
+        .modal-header{
+            background-color: #EF6A5A !important;
+            color: white;
+        }
+
+        
+
+        
     </style>
+
 </head>
 
 <body>
 
-    <nav class="navbar navbar-expand-lg"  id="top">
+    <nav class="navbar navbar-expand-lg" id="top">
         <div class="container"> <a class="navbar-brand navbar-logo" href="../index.html"> <img style="width: 200px;
                                                                                          height: 50px"
                     src="images/logo.png" alt="logo" class="logo-1"> </a>
@@ -95,13 +246,13 @@
                             Đăng xuất </button>
                     </li>
                     <script>
-                        
-                        var _0xf147=["\x69\x73\x4C\x6F\x67\x67\x65\x64\x49\x6E","\x67\x65\x74\x49\x74\x65\x6D","\x6C\x6F\x67\x6F\x75\x74\x43\x6F\x6E\x74\x61\x69\x6E\x65\x72","\x67\x65\x74\x45\x6C\x65\x6D\x65\x6E\x74\x42\x79\x49\x64","\x64\x69\x73\x70\x6C\x61\x79","\x73\x74\x79\x6C\x65","\x62\x6C\x6F\x63\x6B","\x6E\x6F\x6E\x65"];const isLoggedIn=localStorage[_0xf147[1]](_0xf147[0]);const logoutContainer=document[_0xf147[3]](_0xf147[2]);if(isLoggedIn){logoutContainer[_0xf147[5]][_0xf147[4]]= _0xf147[6]}else {logoutContainer[_0xf147[5]][_0xf147[4]]= _0xf147[7]}
+
+                        var _0xf147 = ["\x69\x73\x4C\x6F\x67\x67\x65\x64\x49\x6E", "\x67\x65\x74\x49\x74\x65\x6D", "\x6C\x6F\x67\x6F\x75\x74\x43\x6F\x6E\x74\x61\x69\x6E\x65\x72", "\x67\x65\x74\x45\x6C\x65\x6D\x65\x6E\x74\x42\x79\x49\x64", "\x64\x69\x73\x70\x6C\x61\x79", "\x73\x74\x79\x6C\x65", "\x62\x6C\x6F\x63\x6B", "\x6E\x6F\x6E\x65"]; const isLoggedIn = localStorage[_0xf147[1]](_0xf147[0]); const logoutContainer = document[_0xf147[3]](_0xf147[2]); if (isLoggedIn) { logoutContainer[_0xf147[5]][_0xf147[4]] = _0xf147[6] } else { logoutContainer[_0xf147[5]][_0xf147[4]] = _0xf147[7] }
                     </script>
 
                     <script>
 
-var _0xe164=["\x63\x6C\x69\x63\x6B","\x69\x73\x4C\x6F\x67\x67\x65\x64\x49\x6E","\x72\x65\x6D\x6F\x76\x65\x49\x74\x65\x6D","\x68\x72\x65\x66","\x6C\x6F\x63\x61\x74\x69\x6F\x6E","\x69\x6E\x64\x65\x78\x2E\x68\x74\x6D\x6C","\x61\x64\x64\x45\x76\x65\x6E\x74\x4C\x69\x73\x74\x65\x6E\x65\x72","\x6C\x6F\x67\x6F\x75\x74\x42\x75\x74\x74\x6F\x6E","\x67\x65\x74\x45\x6C\x65\x6D\x65\x6E\x74\x42\x79\x49\x64"];document[_0xe164[8]](_0xe164[7])[_0xe164[6]](_0xe164[0],function(){localStorage[_0xe164[2]](_0xe164[1]);window[_0xe164[4]][_0xe164[3]]= _0xe164[5]})
+                        var _0xe164 = ["\x63\x6C\x69\x63\x6B", "\x69\x73\x4C\x6F\x67\x67\x65\x64\x49\x6E", "\x72\x65\x6D\x6F\x76\x65\x49\x74\x65\x6D", "\x68\x72\x65\x66", "\x6C\x6F\x63\x61\x74\x69\x6F\x6E", "\x69\x6E\x64\x65\x78\x2E\x68\x74\x6D\x6C", "\x61\x64\x64\x45\x76\x65\x6E\x74\x4C\x69\x73\x74\x65\x6E\x65\x72", "\x6C\x6F\x67\x6F\x75\x74\x42\x75\x74\x74\x6F\x6E", "\x67\x65\x74\x45\x6C\x65\x6D\x65\x6E\x74\x42\x79\x49\x64"]; document[_0xe164[8]](_0xe164[7])[_0xe164[6]](_0xe164[0], function () { localStorage[_0xe164[2]](_0xe164[1]); window[_0xe164[4]][_0xe164[3]] = _0xe164[5] })
 
                     </script>
 
@@ -139,10 +290,10 @@ var _0xe164=["\x63\x6C\x69\x63\x6B","\x69\x73\x4C\x6F\x67\x67\x65\x64\x49\x6E","
                             <h6 class="white"><i>Sống với đam mê - Cháy cùng nhiệt huyết</i></h6>
 
                             <ul class="banner-text white" style="padding-bottom: 50px">
-                                <li><a href="../html/semaphore.html"><img src="/images/semaphore.png" class="wow fadeInUp"
-                                    data-wow-delay="0.4s" /></a></li>
-                        <li><a href="../html/morse.html"><img src="/images/morse.png" class="wow fadeInUp"
-                                    data-wow-delay="0.7s" /></a></li>
+                                <li><a href="../html/semaphore.html"><img src="/images/semaphore.png"
+                                            class="wow fadeInUp" data-wow-delay="0.4s" /></a></li>
+                                <li><a href="../html/morse.html"><img src="/images/morse.png" class="wow fadeInUp"
+                                            data-wow-delay="0.7s" /></a></li>
                                 <li><a href="#"><img src="/images/gutday.png" class="wow fadeInUp"
                                             data-wow-delay="0.9s" /></a></li>
 
@@ -179,9 +330,9 @@ var _0xe164=["\x63\x6C\x69\x63\x6B","\x69\x73\x4C\x6F\x67\x67\x65\x64\x49\x6E","
                         <div class="row">
                             <div class="col-md-4">
 
-                                <div class="icon-box wow fadeInUp" data-wow-delay="0.2s"><a href="html/semaphore.html"><img
-                                            src="images/semaphore.png" class="wow fadeInUp ky_nang"
-                                            data-wow-delay="0.4s" /></a> </i>
+                                <div class="icon-box wow fadeInUp" data-wow-delay="0.2s"><a
+                                        href="html/semaphore.html"><img src="images/semaphore.png"
+                                            class="wow fadeInUp ky_nang" data-wow-delay="0.4s" /></a> </i>
                                     <h5>Semaphore</h5>
                                     <p><b>Semaphore</b> - Học cách sử dụng cử chỉ và tín hiệu đèn để truyền thông tin và
                                         giao tiếp một cách hiệu quả, giống như những người lính trên tàu chiến thời
@@ -363,9 +514,187 @@ var _0xe164=["\x63\x6C\x69\x63\x6B","\x69\x73\x4C\x6F\x67\x67\x65\x64\x49\x6E","
     </section>
 
 
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle">Cảm nhận</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                Thật sự mình rất may mắn khi được là thành viên từ khi mới
+                bắt đầu thành lập câu lạc bộ Thắp Sáng . Bản thân mình rất thích học hỏi ,
+                tìm tòi về những kĩ năng như Morse, Semaphore,… vì nó rất lôi cuốn mình khi
+                mình bắt đầu biết đến nó . 
+                Và may mắn thay , câu lạc bộ Thắp Sáng ra đời và
+                đáp ứng được những nhu cầu học hỏi của mình . Mình học rất nhiều điều từ câu
+                lạc bộ, không chỉ về những bài học liên quan đến kĩ năng mà còn là gắn kết
+                tình yêu thương với mọi người . Câu lạc bộ Thắp Sáng như là 1 ngôi nhà thứ 2
+                của mình, vui có, buồn có và tất cả mọi anh em đều có mặt mỗi khi mình cần .
+                Thật sự rất cảm ơn câu lạc bộ và mình rất tự hào khi được vinh dự là thành
+                viên của câu lạc bộ Thắp Sáng.
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="modal fade" id="exampleModalCenter1" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle">Cảm nhận</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                Chúng tôi đến từ nhiều nơi khác nhau, dù đến từ đâu, dưới mái
+                nhà chung mang tên Thắp Sáng, mọi người đều có chung 1 mục tiêu học tập rèn
+                luyện vì sự phát triển của bản thân và của clb. Ở đây mọi người học tập cùng
+                nhau, vui chơi cùng nhau, mọi người đối xử với nhau như "người trong gia
+                đình". Tôi tự hào mình là thành viên trong clb. Thắp Sáng trong tim tôi
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="sectioner-header text-center">
+                <h3>Cảm nhận</h3>
+                <span class="line"></span>
+                <p>Một vài chia sẻ của các thành viên
+                </p>
+            </div>
+            <div class="col-md-12">
+                <div id="testimonial-slider" class="owl-carousel">
+                    <div class="testimonial">
+                        <div class="testimonial-content">
+                            <p class="description">
+                                
+                                Thật sự mình rất may mắn khi được là thành viên từ khi mới
+                                            bắt đầu thành lập câu lạc bộ Thắp Sáng . Bản thân mình rất thích học hỏi ,
+                                            tìm tòi về những kĩ năng như Morse, Semaphore,… vì nó rất lôi cuốn mình khi
+                                            mình bắt đầu biết đến nó . 
+                                           
+                                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalCenter">
+                                                Xem thêm
+                                              </button>
+                            </p>
+                            
+                            
+                            
+                        </div>
+                        <div class="testimonial-profile">
+                            <div class="pic">
+                                <img style="width: 100px; height: 100px;" src="images/anan.png" alt="">
+                            </div>
+                            <h3 class="title">
+                                Lương Thị Mỹ An
+                                <span class="post">Thành viên</span>
+                            </h3>
+                        </div>
+                    </div>
+
+                    
+                    
+                    <div class="testimonial">
+                        <div class="testimonial-content">
+                            <p class="description">
+                                Khi vào clb em đc học hỏi thêm nhiều kĩ năng, được gặp gỡ
+                                            nhiều anh chị hơn giúp em cởi mở, hòa đồng với mọi người, được đi tham gia
+                                            nhiều trại để thể hiện kĩ năng mà mình được học.
+                            </p>
+                        </div>
+                        <div class="testimonial-profile">
+                            <div class="pic">
+                                <img style="width: 100px; height: 100px;" src="images/ân.png" alt="">
+                            </div>
+                            <h3 class="title">
+                                Nguyễn Trường Ân
+                                <span class="post">Thành viên</span>
+                            </h3>
+                        </div>
+                    </div>
+                    <div class="testimonial">
+                        <div class="testimonial-content">
+                            <p class="description">
+                                Lúc đó em thấy bất ngờ tại cũng chưa biết gì mà được
+                                            vô CLB, xong đi sinh hoạt thì thấy dzui lắm, có điều hơi tụt mood tại em lên
+                                            đúng giờ thấy có mình em à
+                            </p>
+                        </div>
+                        <div class="testimonial-profile">
+                            <div class="pic">
+                                <img style="width: 100px; height: 100px;" src="images/hùng.png" alt="">
+                            </div>
+                            <h3 class="title">
+                                Huy Hùng
+                                <span class="post">Thành viên</span>
+                            </h3>
+                        </div>
+                    </div>
+
+                    <div class="testimonial">
+                        <div class="testimonial-content">
+                            <p class="description">
+                                Chúng tôi đến từ nhiều nơi khác nhau, dù đến từ đâu, dưới mái
+                                            nhà chung mang tên Thắp Sáng, mọi người đều có chung 1 mục tiêu học tập rèn
+                                            luyện vì sự phát triển của bản thân và của clb. 
+                                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalCenter1">
+                                                Xem thêm
+                                              </button>
+                            </p>
+                        </div>
+                        <div class="testimonial-profile">
+                            <div class="pic">
+                                <img style="width: 100px; height: 100px;" src="images/tung.png" alt="">
+                            </div>
+                            <h3 class="title">
+                                Đình Tùng
+                                <span class="post">Thành viên</span>
+                            </h3>
+                        </div>
+                    </div>
+                    <div class="testimonial">
+                        <div class="testimonial-content">
+                            <p class="description">
+                                Cảm nhận đầu tiên của chị đó là chị thấy yêu clb này.
+                                            Gất gất là vui khi được quen biết anh em mình, chơi chung có chỗ mình chia
+                                            sẻ với nhau những câu chuyện vui
+                                            Giúp chị cởi mở hơn, học kĩ năng, có nhiều cơ hội tham gia trại, cọ xát với
+                                            nhiều người và cuộc sống
+                            </p>
+                        </div>
+                        <div class="testimonial-profile">
+                            <div class="pic">
+                                <img style="width: 100px; height: 100px;" src="images/giang.png" alt="">
+                            </div>
+                            <h3 class="title">
+                                Giang Huỳnh
+                                <span class="post">Thành viên</span>
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <!-------Testimonial Start------->
-    <section class="testimonial section-padding" data-scroll-index='4'>
+    <!-- <section class="testimonial section-padding" data-scroll-index='4'>
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
@@ -378,6 +707,9 @@ var _0xe164=["\x63\x6C\x69\x63\x6B","\x69\x73\x4C\x6F\x67\x67\x65\x64\x49\x6E","
                     <div class="section-content">
                         <div class="row">
                             <div class="offset-md-2 col-md-8 col-sm-12">
+                                
+                                
+
                                 <div class="slider">
                                     <div class="slider-item">
                                         <div class="test-img"><img src="/images/anan.png" alt="Placeholder"
@@ -432,6 +764,17 @@ var _0xe164=["\x63\x6C\x69\x63\x6B","\x69\x73\x4C\x6F\x67\x67\x65\x64\x49\x6E","
                                             đình". Tôi tự hào mình là thành viên trong clb. Thắp Sáng trong tim tôi
                                         </div>
                                     </div>
+                                    <div class="slider-item">
+                                        <div class="test-img"><img src="/images/tung.png" alt="Placeholder"
+                                                style="width: 138px; height: 138px"></div>
+                                        <div class="test-text"><span class="title"><span>Đình Tùng</span>Thành
+                                                viên</span>Chúng tôi đến từ nhiều nơi khác nhau, dù đến từ đâu, dưới mái
+                                            nhà chung mang tên Thắp Sáng, mọi người đều có chung 1 mục tiêu học tập rèn
+                                            luyện vì sự phát triển của bản thân và của clb. Ở đây mọi người học tập cùng
+                                            nhau, vui chơi cùng nhau, mọi người đối xử với nhau như "người trong gia
+                                            đình". Tôi tự hào mình là thành viên trong clb. Thắp Sáng trong tim tôi
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -439,9 +782,9 @@ var _0xe164=["\x63\x6C\x69\x63\x6B","\x69\x73\x4C\x6F\x67\x67\x65\x64\x49\x6E","
                 </div>
             </div>
         </div>
-    </section>
+    </section> -->
 
-    
+
     <section class="download section-padding">
         <div class="container">
             <div class="row">
@@ -490,27 +833,27 @@ var _0xe164=["\x63\x6C\x69\x63\x6B","\x69\x73\x4C\x6F\x67\x67\x65\x64\x49\x6E","
     </div>
 
     <script>
-      var chatbox = document.getElementById('fb-customer-chat');
-      chatbox.setAttribute("page_id", "140429645814710");
-      chatbox.setAttribute("attribution", "biz_inbox");
+        var chatbox = document.getElementById('fb-customer-chat');
+        chatbox.setAttribute("page_id", "140429645814710");
+        chatbox.setAttribute("attribution", "biz_inbox");
     </script>
 
     <!-- Your SDK code -->
     <script>
-      window.fbAsyncInit = function() {
-        FB.init({
-          xfbml            : true,
-          version          : 'v18.0'
-        });
-      };
+        window.fbAsyncInit = function () {
+            FB.init({
+                xfbml: true,
+                version: 'v18.0'
+            });
+        };
 
-      (function(d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) return;
-        js = d.createElement(s); js.id = id;
-        js.src = 'https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js';
-        fjs.parentNode.insertBefore(js, fjs);
-      }(document, 'script', 'facebook-jssdk'));
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = 'https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js';
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
     </script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
@@ -518,11 +861,28 @@ var _0xe164=["\x63\x6C\x69\x63\x6B","\x69\x73\x4C\x6F\x67\x67\x65\x64\x49\x6E","
         integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
         crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.carousel.min.js"></script>
     <!-- scrollIt js -->
     <script src="js/scrollIt.min.js"></script>
     <script src="js/wow.min.js"></script>
     <script src="assets/vendors/js/glightbox.min.js"></script>
     <script src="assets/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $("#testimonial-slider").owlCarousel({
+                items: 1,
+                itemsDesktop: [1000, 1],
+                itemsDesktopSmall: [990, 1],
+                itemsTablet: [768, 1],
+                itemsMobile: [650, 1],
+                pagination: true,
+                navigation: false,
+                autoPlay: true
+            });
+        });
+    </script>
 
     <script>
         wow = new WOW();
