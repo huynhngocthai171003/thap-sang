@@ -1,503 +1,176 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mã hóa mật thư</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+  outline: none;
+}
+
+html,
+body {
+  height: 100%;
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  background-color: #ffd8d8;
+}
+
+.tb {
+  display: table;
+  width: 100%;
+}
+
+.td {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+input,
+button {
+  color: #fff;
+  font-family: Nunito;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  background-color: transparent;
+}
+
+#cover {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  width: 550px;
+  padding: 35px;
+  margin: -83px auto 0 auto;
+  background-color: #ff7575;
+  border-radius: 20px;
+  box-shadow: 0 10px 40px #ff7c7c, 0 0 0 20px #ffffffeb;
+  transform: scale(0.6);
+}
+
+form {
+  height: 96px;
+}
+
+input[type="text"] {
+  width: 100%;
+  height: 96px;
+  font-size: 60px;
+  line-height: 1;
+}
+
+input[type="text"]::placeholder {
+  color: #e16868;
+}
+
+#s-cover {
+  width: 1px;
+  padding-left: 35px;
+}
+
+button {
+  position: relative;
+  display: block;
+  width: 84px;
+  height: 96px;
+  cursor: pointer;
+}
+
+#s-circle {
+  position: relative;
+  top: -8px;
+  left: 0;
+  width: 43px;
+  height: 43px;
+  margin-top: 0;
+  border-width: 15px;
+  border: 15px solid #fff;
+  background-color: transparent;
+  border-radius: 50%;
+  transition: 0.5s ease all;
+}
+
+button span {
+  position: absolute;
+  top: 68px;
+  left: 43px;
+  display: block;
+  width: 45px;
+  height: 15px;
+  background-color: transparent;
+  border-radius: 10px;
+  transform: rotateZ(52deg);
+  transition: 0.5s ease all;
+}
+
+button span:before,
+button span:after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 45px;
+  height: 15px;
+  background-color: #fff;
+  border-radius: 10px;
+  transform: rotateZ(0);
+  transition: 0.5s ease all;
+}
+
+#s-cover:hover #s-circle {
+  top: -1px;
+  width: 67px;
+  height: 15px;
+  border-width: 0;
+  background-color: #fff;
+  border-radius: 20px;
+}
+
+#s-cover:hover span {
+  top: 50%;
+  left: 56px;
+  width: 25px;
+  margin-top: -9px;
+  transform: rotateZ(0);
+}
+
+#s-cover:hover button span:before {
+  bottom: 11px;
+  transform: rotateZ(52deg);
+}
+
+#s-cover:hover button span:after {
+  bottom: -11px;
+  transform: rotateZ(-52deg);
+}
+#s-cover:hover button span:before,
+#s-cover:hover button span:after {
+  right: -6px;
+  width: 40px;
+  background-color: #fff;
+}
+
+  </style>
 </head>
-
 <body>
-    <h1>Mã hóa mật thư chữ thành số</h1>
-    <label for="inputText">Nhập mật thư (chữ cái): </label>
-    <input type="text" id="inputText" placeholder="Nhập mật thư (chữ cái)"><br>
-
-    <label for="inputStart">Giá trị bắt đầu (chữ cái): </label>
-    <input type="text" id="inputStart" placeholder="Nhập giá trị bắt đầu (chữ cái)"><br>
-  
-    <label for="inputNumber">Chữ cái bắt đầu bằng số (1-26): </label>
-    <input type="number" id="inputNumber" placeholder="Nhập số để xác định chữ cái bắt đầu"><br>
-
-    <button onclick="executeEncoding()">Mã hóa</button>
-
-    <p>Chữ cái đã mã hóa thành số: <span id="outputText"></span></p>
-
-    <script>
-
-
-
-
-
-// function decodeTextWithCustomStart(text, startChar, startNumber) {
-//   let decodedText = '';
-//   let currentChunk = '';
-
-//   for (let i = 0; i < text.length; i++) {
-//     const char = text[i];
-//     if (char >= '0' && char <= '9') {
-//       // Nếu char là số, thêm vào currentChunk
-//       currentChunk += char;
-//     } else {
-//       // Nếu char không phải số, xử lý currentChunk (nếu có)
-//       if (currentChunk !== '') {
-//         let decodedCharCode = parseInt(currentChunk) - startNumber + 1;
-
-//         // Kiểm tra nếu decodedCharCode nằm trong khoảng từ 1 đến 26 hoặc là 0, thì hiển thị dưới dạng chữ cái
-//         if ((decodedCharCode >= 1 && decodedCharCode <= 26) || decodedCharCode === 0) {
-//           decodedCharCode += startChar.charCodeAt(0) - 'A'.charCodeAt(0);
-
-//           if (decodedCharCode > 26) {
-//             decodedCharCode -= 26;
-//           }
-
-//           const decodedChar = String.fromCharCode('A'.charCodeAt(0) + decodedCharCode - 1);
-//           decodedText += decodedChar;
-//         } else {
-//           // Ngược lại, giữ nguyên giá trị
-//           decodedText += currentChunk;
-//         }
-
-//         currentChunk = ''; // Đặt lại currentChunk sau khi xử lý
-//       }
-
-//       // Nếu char không phải số, thêm vào decodedText
-//       if (!(char >= '0' && char <= '9')) {
-//         decodedText += char;
-//       }
-//     }
-//   }
-
-//   // Xử lý cuối cùng của currentChunk (nếu có)
-//   if (currentChunk !== '') {
-//     let decodedCharCode = parseInt(currentChunk) - startNumber + 1;
-
-//     // Kiểm tra nếu decodedCharCode nằm trong khoảng từ 1 đến 26 hoặc là 0, thì hiển thị dưới dạng chữ cái
-//     if ((decodedCharCode >= 1 && decodedCharCode <= 26) || decodedCharCode === 0) {
-//       decodedCharCode += startChar.charCodeAt(0) - 'A'.charCodeAt(0);
-
-//       if (decodedCharCode > 26) {
-//         decodedCharCode -= 26;
-//       }
-
-//       const decodedChar = String.fromCharCode('A'.charCodeAt(0) + decodedCharCode - 1);
-//       decodedText += decodedChar;
-//     } else {
-//       // Ngược lại, giữ nguyên giá trị
-//       decodedText += currentChunk;
-//     }
-//   }
-
-//   return decodedText;
-// }
-
-
-// function decodeTextWithCustomStart(text, startChar, startNumber) {
-//   let decodedText = '';
-//   let currentChunk = '';
-
-//   for (let i = 0; i < text.length; i++) {
-//     const char = text[i];
-//     if (char >= '0' && char <= '9') {
-//       // Nếu char là số, thêm vào currentChunk
-//       currentChunk += char;
-//     } else {
-//       // Nếu char không phải số, xử lý currentChunk (nếu có)
-//       if (currentChunk !== '') {
-//         let decodedCharCode = parseInt(currentChunk) - startNumber + 1;
-
-//         // Kiểm tra nếu decodedCharCode nằm trong khoảng từ 1 đến 26, thì hiển thị dưới dạng chữ cái
-//         if (decodedCharCode >= 1 && decodedCharCode <= 26) {
-//           decodedCharCode += startChar.charCodeAt(0) - 'A'.charCodeAt(0);
-
-//           if (decodedCharCode > 26) {
-//             decodedCharCode -= 26;
-//           }
-
-//           const decodedChar = String.fromCharCode('A'.charCodeAt(0) + decodedCharCode - 1);
-//           decodedText += decodedChar;
-//         } else {
-//           // Nếu không nằm trong khoảng từ 1 đến 26, hiển thị "?"
-//           decodedText += '?';
-//         }
-
-//         currentChunk = ''; // Đặt lại currentChunk sau khi xử lý
-//       }
-
-//       // Nếu char không phải số, thêm vào decodedText
-//       if (!(char >= '0' && char <= '9')) {
-//         decodedText += char;
-//       }
-//     }
-//   }
-
-//   // Xử lý cuối cùng của currentChunk (nếu có)
-//   if (currentChunk !== '') {
-//     let decodedCharCode = parseInt(currentChunk) - startNumber + 1;
-
-//     // Kiểm tra nếu decodedCharCode nằm trong khoảng từ 1 đến 26, thì hiển thị dưới dạng chữ cái
-//     if (decodedCharCode >= 1 && decodedCharCode <= 26) {
-//       decodedCharCode += startChar.charCodeAt(0) - 'A'.charCodeAt(0);
-
-//       if (decodedCharCode > 26) {
-//         decodedCharCode -= 26;
-//       }
-
-//       const decodedChar = String.fromCharCode('A'.charCodeAt(0) + decodedCharCode - 1);
-//       decodedText += decodedChar;
-//     } else {
-//       // Nếu không nằm trong khoảng từ 1 đến 26, hiển thị "?"
-//       decodedText += '?';
-//     }
-//   }
-
-//   return decodedText;
-// }
-
-// function decodeTextWithCustomStart(text, startChar, startNumber) {
-//   let decodedText = '';
-//   let currentChunk = '';
-
-//   for (let i = 0; i < text.length; i++) {
-//     const char = text[i];
-//     if (char >= '0' && char <= '9') {
-//       // Nếu char là số, thêm vào currentChunk
-//       currentChunk += char;
-//     } else {
-//       // Nếu char không phải số, xử lý currentChunk (nếu có)
-//       if (currentChunk !== '') {
-//         let decodedCharCode = parseInt(currentChunk) - startNumber + 1;
-
-//         // Kiểm tra nếu decodedCharCode nằm trong khoảng từ 1 đến 26, thì hiển thị dưới dạng chữ cái
-//         if (decodedCharCode >= 1 && decodedCharCode <= 26) {
-//           decodedCharCode += startChar.charCodeAt(0) - 'A'.charCodeAt(0);
-
-//           if (decodedCharCode > 26) {
-//             decodedCharCode -= 26;
-//           }
-
-//           const decodedChar = String.fromCharCode('A'.charCodeAt(0) + decodedCharCode - 1);
-//           decodedText += decodedChar;
-//         } else {
-//           // Nếu không nằm trong khoảng từ 1 đến 26, hiển thị "?"
-//           decodedText += '?';
-//         }
-
-//         currentChunk = ''; // Đặt lại currentChunk sau khi xử lý
-//       }
-
-//       // Nếu char không phải số, thêm vào decodedText
-//       if (!(char >= '0' && char <= '9')) {
-//         decodedText += char;
-//       }
-//     }
-//   }
-
-//   // Xử lý cuối cùng của currentChunk (nếu có)
-//   if (currentChunk !== '') {
-//     let decodedCharCode = parseInt(currentChunk) - startNumber + 1;
-
-//     // Kiểm tra nếu decodedCharCode nằm trong khoảng từ 1 đến 26, thì hiển thị dưới dạng chữ cái
-//     if (decodedCharCode >= 1 && decodedCharCode <= 26) {
-//       decodedCharCode += startChar.charCodeAt(0) - 'A'.charCodeAt(0);
-
-//       if (decodedCharCode > 26) {
-//         decodedCharCode -= 26;
-//       }
-
-//       const decodedChar = String.fromCharCode('A'.charCodeAt(0) + decodedCharCode - 1);
-//       decodedText += decodedChar;
-//     } else {
-//       // Nếu decodedCharCode không nằm trong khoảng từ 1 đến 26, hiển thị "?"
-//       decodedText += '?';
-//     }
-//   }
-
-//   return decodedText;
-// }
-
-
-//------------------------------------------------------------------------------------
-// function decodeTextWithCustomStart(text, startChar, startNumber) {
-//   let decodedText = '';
-//   let currentChunk = '';
-//   let lastWasNumber = false;
-
-//   for (let i = 0; i < text.length; i++) {
-//     const char = text[i];
-//     if (char >= '0' && char <= '9') {
-//       // Nếu char là số, thêm vào currentChunk
-//       currentChunk += char;
-//       lastWasNumber = true;
-//     } else {
-//       // Nếu char không phải số, xử lý currentChunk (nếu có)
-//       if (currentChunk !== '') {
-//         if (currentChunk === '27') {
-//           // Xử lý trường hợp số 27
-//           decodedCharCode = 27; // Số 27 vẫn giữ nguyên
-//         } else if (currentChunk === '1') {
-//           // Xử lý trường hợp số 1
-//           decodedCharCode = 0; // Số 1 vẫn giữ nguyên
-//         } else {
-//           decodedCharCode = parseInt(currentChunk) - startNumber + 1;
-//         }
-
-//         // Kiểm tra nếu decodedCharCode nằm trong khoảng từ 1 đến 26, thì hiển thị dưới dạng chữ cái
-//         if (decodedCharCode >= 0 && decodedCharCode <= 26) {
-//           decodedCharCode += startChar.charCodeAt(0) - 'A'.charCodeAt(0);
-
-//           if (decodedCharCode > 26) {
-//             decodedCharCode -= 26;
-//           }
-
-//           const decodedChar = String.fromCharCode('A'.charCodeAt(0) + decodedCharCode - 1);
-//           decodedText += decodedChar;
-//         } else {
-//           // Nếu không nằm trong khoảng từ 1 đến 26, hiển thị "?"
-//           decodedText += '?';
-//         }
-
-//         currentChunk = ''; // Đặt lại currentChunk sau khi xử lý
-//       }
-
-//       // Nếu char không phải số, thêm vào decodedText
-//       if (!(char >= '0' && char <= '9')) {
-//         decodedText += char;
-//       }
-
-//       if (lastWasNumber && char !== ' ') {
-//         // Thêm dấu cách sau số nếu không phải dấu cách
-//         decodedText += ' ';
-//       }
-
-//       lastWasNumber = false;
-//     }
-//   }
-
-//   // Xử lý cuối cùng của currentChunk (nếu có)
-//   if (currentChunk !== '') {
-//     if (currentChunk === '27') {
-//           // Xử lý trường hợp số 27
-//           decodedCharCode = 27; // Số 27 vẫn giữ nguyên
-//         } else if (currentChunk === '1') {
-//           // Xử lý trường hợp số 1
-//           decodedCharCode = 0; // Số 1 vẫn giữ nguyên
-//         } else {
-//           decodedCharCode = parseInt(currentChunk) - startNumber + 1;
-//         }
-
-//     if (decodedCharCode >= 0 && decodedCharCode <= 26) {
-//       decodedCharCode += startChar.charCodeAt(0) - 'A'.charCodeAt(0);
-
-//       if (decodedCharCode > 26) {
-//         decodedCharCode -= 26;
-//       }
-
-//       const decodedChar = String.fromCharCode('A'.charCodeAt(0) + decodedCharCode - 1);
-//       decodedText += decodedChar;
-//     } else {
-//       // Nếu không nằm trong khoảng từ 1 đến 26, hiển thị "?"
-//       decodedText += '?';
-//     }
-//   }
-
-//   return decodedText;
-// }
-
-
-// function decodeTextWithCustomStart(text, startChar, startNumber) {
-//   let decodedText = '';
-//   let currentChunk = '';
-//   let lastWasNumber = false;
-
-//   for (let i = 0; i < text.length; i++) {
-//     const char = text[i];
-//     if (char >= '0' && char <= '9') {
-//       // Nếu char là số, thêm vào currentChunk
-//       currentChunk += char;
-//       lastWasNumber = true;
-//     } else {
-//       // Nếu char không phải số, xử lý currentChunk (nếu có)
-//       if (currentChunk !== '') {
-//         let decodedCharCode = parseInt(currentChunk) - startNumber;
-//         if (decodedCharCode < 0) {
-//           decodedCharCode += 26;
-//         }
-//         decodedCharCode = (decodedCharCode + startChar.charCodeAt(0) - 'A'.charCodeAt(0)) % 26;
-//         const decodedChar = String.fromCharCode('A'.charCodeAt(0) + decodedCharCode);
-//         decodedText += decodedChar;
-//         currentChunk = ''; // Đặt lại currentChunk sau khi xử lý
-//       }
-
-//       // Nếu char không phải số, thêm vào decodedText
-//       if (!(char >= '0' && char <= '9')) {
-//         decodedText += char;
-//       }
-
-//       if (lastWasNumber && char !== ' ') {
-//         // Thêm dấu cách sau số nếu không phải dấu cách
-//         decodedText += ' ';
-//       }
-
-//       lastWasNumber = false;
-//     }
-//   }
-
-//   // Xử lý cuối cùng của currentChunk (nếu có)
-//   if (currentChunk !== '') {
-//     let decodedCharCode = parseInt(currentChunk) - startNumber;
-//     if (decodedCharCode < 0) {
-//       decodedCharCode += 26;
-//     }
-//     decodedCharCode = (decodedCharCode + startChar.charCodeAt(0) - 'A'.charCodeAt(0)) % 26;
-//     const decodedChar = String.fromCharCode('A'.charCodeAt(0) + decodedCharCode);
-//     decodedText += decodedChar;
-//   }
-
-//   return decodedText;
-// }
-
-
-function decodeTextWithCustomStart(text, startChar, startNumber) {
-  let decodedText = '';
-  let currentChunk = '';
-  let lastWasNumber = false;
-
-  for (let i = 0; i < text.length; i++) {
-    const char = text[i];
-    if (char >= '0' && char <= '9') {
-      // Nếu char là số, thêm vào currentChunk
-      currentChunk += char;
-      lastWasNumber = true;
-    } else {
-      // Nếu char không phải số, xử lý currentChunk (nếu có)
-      if (currentChunk !== '') {
-        const num = parseInt(currentChunk);
-        if (num >= 1 && num <= 26) {
-          let decodedCharCode = num - startNumber;
-          if (decodedCharCode < 0) {
-            decodedCharCode += 26;
-          }
-          decodedCharCode = (decodedCharCode + startChar.charCodeAt(0) - 'A'.charCodeAt(0)) % 26;
-          const decodedChar = String.fromCharCode('A'.charCodeAt(0) + decodedCharCode);
-          decodedText += decodedChar;
-        } else {
-          // Nếu số không nằm trong khoảng từ 1 đến 26, hiển thị "?"
-          decodedText += '?';
-        }
-        currentChunk = ''; // Đặt lại currentChunk sau khi xử lý
-      }
-
-      // Nếu char không phải số, thêm vào decodedText
-      if (!(char >= '0' && char <= '9')) {
-        decodedText += char;
-      }
-
-      if (lastWasNumber && char !== ' ') {
-        // Thêm dấu cách sau số nếu không phải dấu cách
-        decodedText += ' ';
-      }
-
-      lastWasNumber = false;
-    }
-  }
-
-  // Xử lý cuối cùng của currentChunk (nếu có)
-  if (currentChunk !== '') {
-    const num = parseInt(currentChunk);
-    if (num >= 1 && num <= 26) {
-      let decodedCharCode = num - startNumber;
-      if (decodedCharCode < 0) {
-        decodedCharCode += 26;
-      }
-      decodedCharCode = (decodedCharCode + startChar.charCodeAt(0) - 'A'.charCodeAt(0)) % 26;
-      const decodedChar = String.fromCharCode('A'.charCodeAt(0) + decodedCharCode);
-      decodedText += decodedChar;
-    } else {
-      // Nếu số không nằm trong khoảng từ 1 đến 26, hiển thị "?"
-      decodedText += '?';
-    }
-  }
-
-  return decodedText;
-}
-
-
-
-
-// Hàm để thực thi giải mã dựa trên input của người dùng
-function executeEncoding() {
-  const encodedText = document.getElementById('inputText').value;
-  const startChar = document.getElementById('inputStart').value;
-  const startNumber = parseInt(document.getElementById('inputNumber').value);
-
-  if (encodedText && startChar && !isNaN(startNumber)) {
-    const decodedText = decodeTextWithCustomStart(encodedText, startChar, startNumber);
-    document.getElementById('outputText').textContent = decodedText;
-  } else {
-    alert('Vui lòng nhập cả mật thư, giá trị bắt đầu, và số.');
-  }
-}
-
-
-// Hàm để mã hóa mật thư chữ thành số dựa trên quy tắc mới và giá trị bắt đầu
-// function encodeTextWithCustomStart(text, startChar, startNumber) {
-//   text = text.toUpperCase();
-//   let encodedText = '';
-  
-//   // Kiểm tra xem startChar có phải là chữ cái hay không
-//   if (startChar >= 'A' && startChar <= 'Z') {
-//     let startCharCode = startChar.charCodeAt(0) - 'A'.charCodeAt(0) + 1;
-
-//     // Kiểm tra xem startNumber có nằm trong khoảng từ 1 đến 26 không
-//     if (startNumber >= 1 && startNumber <= 26) {
-//       for (let i = 0; i < text.length; i++) {
-//         const char = text[i];
-//         if (char >= 'A' && char <= 'Z') {
-//           const charCode = char.charCodeAt(0) - 'A'.charCodeAt(0) + 1;
-//           let encodedCharCode = charCode - startCharCode + 1;
-
-//           if (encodedCharCode <= 0) {
-//             encodedCharCode += 26;
-//           }
-
-//           // Cộng thêm startNumber vào kết quả
-//           encodedCharCode += startNumber - 1;
-
-//           if (encodedCharCode > 26) {
-//             encodedCharCode -= 26;
-//           }
-
-//           encodedText += encodedCharCode.toString();
-//         } else {
-//           encodedText += char;
-//         }
-//       }
-//     } else {
-//       alert('Vui lòng nhập một số từ 1 đến 26 để xác định chữ cái bắt đầu.');
-//     }
-//   } else {
-//     alert('Vui lòng nhập một chữ cái để bắt đầu.');
-//   }
-
-//   return encodedText;
-// }
-
-
-// // Hàm để thực thi mã hóa dựa trên input của người dùng
-// function executeEncoding() {
-//   const plaintext = document.getElementById('inputText').value;
-//   const startChar = document.getElementById('inputStart').value;
-//   const startNumber = parseInt(document.getElementById('inputNumber').value);
-
-//   if (plaintext && startChar && !isNaN(startNumber)) {
-//     const encodedText = encodeTextWithCustomStart(plaintext, startChar, startNumber);
-//     document.getElementById('outputText').textContent = encodedText;
-//   } else {
-//     alert('Vui lòng nhập cả mật thư, giá trị bắt đầu, và số.');
-//   }
-// }
-
-    </script>
+  <div id="cover">
+    <form method="get" action="">
+      <div class="tb">
+        <div class="td"><input type="text" placeholder="Search" required></div>
+        <div class="td" id="s-cover">
+          <button type="submit">
+            <div id="s-circle"></div>
+            <span></span>
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
 </body>
-
 </html>
