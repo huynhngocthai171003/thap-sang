@@ -642,6 +642,7 @@
           </div>
     </div>
     <script>
+        
         const vietnameseToTelexMap = {
             'à': 'af', 'á': 'as', 'ả': 'ar', 'ã': 'ax', 'ạ': 'aj', 
             'ằ': 'awf', 'ắ': 'aws', 'ẳ': 'awr', 'ẵ': 'awx', 'ặ': 'awj',
@@ -694,61 +695,49 @@
         }
 
         function playMorse(morseCode, dotDuration) {
-            const dashDuration = dotDuration * 3;
-            const letterSpace = dotDuration * 3; 
-            const wordSpace = dotDuration * 7; 
-            const frequency = 600; 
-            const volume = 0.5;
+    const dashDuration = dotDuration * 4;
+    const letterSpace = dotDuration * 4; // Thêm khoảng cách giữa các chữ cái
+    const wordSpace = dotDuration * 10; // Thêm khoảng cách giữa các từ
+    const frequency = 600; // Hz
+    const volume = 0.5;
 
-            let time = 0;
-            for (let symbol of morseCode) {
-                if (symbol === '.') {
-                    setTimeout(() => playTone(dotDuration, frequency, volume), time);
-                    time += dotDuration;
-                } else if (symbol === '-') {
-                    setTimeout(() => playTone(dashDuration, frequency, volume), time);
-                    time += dashDuration;
-                } else if (symbol === ' ') {
-                    time += wordSpace - dotDuration; 
-                }
-                
+    let time = 0;
+    setTimeout(() => {
+        for (let symbol of morseCode) {
+            if (symbol === '.') {
+                setTimeout(() => playTone(dotDuration, frequency, volume), time);
                 time += dotDuration;
+            } else if (symbol === '-') {
+                setTimeout(() => playTone(dashDuration, frequency, volume), time);
+                time += dashDuration;
+            } else if (symbol === ' ') {
+                time += wordSpace - dotDuration; // Thêm khoảng cách giữa các từ
             }
+            
+            time += dotDuration;
         }
-
-        let timeoutId; // Biến để lưu ID của setTimeout
-
-        let audioContextActive = true; // Biến để theo dõi trạng thái của audio context
-
-function stopPlaying() {
-    clearTimeout(timeoutId); // Ngắt timeout hiện tại
-    if (audioContextActive) { // Chỉ tạm dừng nếu audio context đang hoạt động
-        audioContext.suspend(); // Tạm dừng audio context để ngắt âm thanh
-        audioContextActive = false; // Đặt cờ là false để chỉ ra rằng audio context đã tạm dừng
-    }
+    }, 50);
 }
+window.onload = function() {
+       
+            setTimeout(() => {
+                document.getElementById('playButton').addEventListener('click', () => {
+                    const text = document.getElementById('textInput').value;
+                    const telexText = vietnameseToTelex(text);
+                    const morseCode = textToMorse(telexText);
+                    const dotDuration = parseInt(document.getElementById('speedControl').value);
 
-document.getElementById('playButton').addEventListener('click', () => {
-    const text = document.getElementById('textInput').value;
-    const telexText = vietnameseToTelex(text);
-    const morseCode = textToMorse(telexText);
-    const dotDuration = parseInt(document.getElementById('speedControl').value);
+                 
+                    setTimeout(() => {
+                        playMorse(morseCode, dotDuration);
+                    }, 1000);
+                });
 
-    // Đợi 1 giây trước khi phát mã Morse
-    timeoutId = setTimeout(() => {
-        if (!audioContextActive) { // Nếu audio context đã tạm dừng, khôi phục nó trước khi phát âm thanh
-            audioContext.resume(); // Khôi phục audio context để phát âm thanh
-            audioContextActive = true; // Đặt cờ là true để chỉ ra rằng audio context đang hoạt động
-        }
-        playMorse(morseCode, dotDuration);
-    }, 1000);
-});
-
-        document.getElementById('stopButton').addEventListener('click', stopPlaying); // Gán sự kiện dừng lại
-
-        document.getElementById('speedControl').addEventListener('input', (event) => {
-            document.getElementById('speedValue').textContent = event.target.value;
-        });
+                document.getElementById('speedControl').addEventListener('input', (event) => {
+                    document.getElementById('speedValue').textContent = event.target.value;
+                });
+            }, 100);
+        };
     </script>
 
     <!-- content -->
