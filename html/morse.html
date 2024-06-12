@@ -43,6 +43,9 @@
             background-color: #F69C9B !important;
             color: white !important;
         }
+        input[type=range]{
+            height: 10px;
+        }
     </style>
 </head>
 
@@ -612,6 +615,141 @@
             </div>
         </div>
     </section>
+
+    <div id="about-section" class="container" style="margin-top: 48px ;margin-bottom: 48px ">
+        <div class="row">
+            <div style="margin-bottom:40px " class="sectioner-header text-center">
+                <h3>Luyện tập</h3>
+                <span class="line"></span>
+
+            </div>
+            
+           
+        </div>
+        <div data-mdb-input-init class="form-outline mb-4">
+            <label class="form-label"  for="textAreaExample6">Nhập bạch văn</label>
+           
+            <textarea class="form-control" id="textInput" rows="3" style="margin-bottom: 20px;"></textarea>
+
+            <div class="">
+                <label for="speedControl">Tốc độ:</label>
+                <input  type="range" id="speedControl" min="70" max="500" >
+                <span id="speedValue">200</span> ms
+                <button type="button" id="playButton" class="btn btn-danger" data-mdb-ripple-init>Phát tin</button>
+                <button type="button" id="stopButton" class="btn btn-dark">Dừng</button> 
+              </div>
+           
+          </div>
+    </div>
+    <script>
+        const vietnameseToTelexMap = {
+            'à': 'af', 'á': 'as', 'ả': 'ar', 'ã': 'ax', 'ạ': 'aj', 
+            'ằ': 'awf', 'ắ': 'aws', 'ẳ': 'awr', 'ẵ': 'awx', 'ặ': 'awj',
+            'ầ': 'aaf', 'ấ': 'aas', 'ẩ': 'aar', 'ẫ': 'aax', 'ậ': 'aaj',
+            'è': 'ef', 'é': 'es', 'ẻ': 'er', 'ẽ': 'ex', 'ẹ': 'ej',
+            'ề': 'eef', 'ế': 'ees', 'ể': 'eer', 'ễ': 'eex', 'ệ': 'eej',
+            'ì': 'if', 'í': 'is', 'ỉ': 'ir', 'ĩ': 'ix', 'ị': 'ij',
+            'ò': 'of', 'ó': 'os', 'ỏ': 'or', 'õ': 'ox', 'ọ': 'oj',
+            'ồ': 'oof', 'ố': 'oos', 'ổ': 'oor', 'ỗ': 'oox', 'ộ': 'ooj',
+            'ờ': 'owf', 'ớ': 'ows', 'ở': 'owr', 'ỡ': 'owx', 'ợ': 'owj',
+            'ù': 'uf', 'ú': 'us', 'ủ': 'ur', 'ũ': 'ux', 'ụ': 'uj',
+            'ừ': 'uwf', 'ứ': 'uws', 'ử': 'uwr', 'ữ': 'uwx', 'ự': 'uwj',
+            'ỳ': 'yf', 'ý': 'ys', 'ỷ': 'yr', 'ỹ': 'yx', 'ỵ': 'yj',
+            'đ': 'dd',
+            'ă': 'aw', 'â': 'aa', 'ê': 'ee', 'ô': 'oo', 'ơ': 'ow', 'ư': 'uw'
+        };
+
+        const morseCodeMap = {
+            'a': '.-',    'b': '-...',  'c': '-.-.',  'd': '-..',   'e': '.',     'f': '..-.', 
+            'g': '--.',   'h': '....',  'i': '..',    'j': '.---',  'k': '-.-',   'l': '.-..', 
+            'm': '--',    'n': '-.',    'o': '---',   'p': '.--.',  'q': '--.-',  'r': '.-.', 
+            's': '...',   't': '-',     'u': '..-',   'v': '...-',  'w': '.--',   'x': '-..-', 
+            'y': '-.--',  'z': '--..',  '1': '.----', '2': '..---', '3': '...--', '4': '....-', 
+            '5': '.....', '6': '-....', '7': '--...', '8': '---..', '9': '----.', '0': '-----',
+            ' ': ' '
+        };
+
+        function vietnameseToTelex(text) {
+            return text.split('').map(char => vietnameseToTelexMap[char] || char).join('');
+        }
+
+        function textToMorse(text) {
+            return text.toLowerCase().split('').map(char => morseCodeMap[char] || '').join(' ');
+        }
+
+        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+
+        function playTone(duration, frequency, volume) {
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+
+            oscillator.frequency.value = frequency;
+            gainNode.gain.value = volume;
+
+            oscillator.start();
+            setTimeout(() => oscillator.stop(), duration);
+        }
+
+        function playMorse(morseCode, dotDuration) {
+            const dashDuration = dotDuration * 3;
+            const letterSpace = dotDuration * 3; 
+            const wordSpace = dotDuration * 7; 
+            const frequency = 600; 
+            const volume = 0.5;
+
+            let time = 0;
+            for (let symbol of morseCode) {
+                if (symbol === '.') {
+                    setTimeout(() => playTone(dotDuration, frequency, volume), time);
+                    time += dotDuration;
+                } else if (symbol === '-') {
+                    setTimeout(() => playTone(dashDuration, frequency, volume), time);
+                    time += dashDuration;
+                } else if (symbol === ' ') {
+                    time += wordSpace - dotDuration; 
+                }
+                
+                time += dotDuration;
+            }
+        }
+
+        let timeoutId; // Biến để lưu ID của setTimeout
+
+        let audioContextActive = true; // Biến để theo dõi trạng thái của audio context
+
+function stopPlaying() {
+    clearTimeout(timeoutId); // Ngắt timeout hiện tại
+    if (audioContextActive) { // Chỉ tạm dừng nếu audio context đang hoạt động
+        audioContext.suspend(); // Tạm dừng audio context để ngắt âm thanh
+        audioContextActive = false; // Đặt cờ là false để chỉ ra rằng audio context đã tạm dừng
+    }
+}
+
+document.getElementById('playButton').addEventListener('click', () => {
+    const text = document.getElementById('textInput').value;
+    const telexText = vietnameseToTelex(text);
+    const morseCode = textToMorse(telexText);
+    const dotDuration = parseInt(document.getElementById('speedControl').value);
+
+    // Đợi 1 giây trước khi phát mã Morse
+    timeoutId = setTimeout(() => {
+        if (!audioContextActive) { // Nếu audio context đã tạm dừng, khôi phục nó trước khi phát âm thanh
+            audioContext.resume(); // Khôi phục audio context để phát âm thanh
+            audioContextActive = true; // Đặt cờ là true để chỉ ra rằng audio context đang hoạt động
+        }
+        playMorse(morseCode, dotDuration);
+    }, 1000);
+});
+
+        document.getElementById('stopButton').addEventListener('click', stopPlaying); // Gán sự kiện dừng lại
+
+        document.getElementById('speedControl').addEventListener('input', (event) => {
+            document.getElementById('speedValue').textContent = event.target.value;
+        });
+    </script>
 
     <!-- content -->
     <section class="download section-padding">
