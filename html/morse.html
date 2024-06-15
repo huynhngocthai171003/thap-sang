@@ -43,7 +43,8 @@
             background-color: #F69C9B !important;
             color: white !important;
         }
-        input[type=range]{
+
+        input[type=range] {
             height: 10px;
         }
     </style>
@@ -116,23 +117,6 @@
         </div>
     </nav>
 
-    <!-- <span th:if="${message != null}">
-        
-        <div id="messageElement" style="display: none;">[[${message}]]</div>
-        <script>
-            document.addEventListener('DOMContentLoaded', function () {
-                var messageElement = document.getElementById("messageElement");
-                var message = messageElement.textContent.trim(); 
-
-                Swal.fire({
-                    title: 'Yeah',
-                    text: message,
-                    icon: 'success',
-                    confirmButtonText: 'OK'
-                });
-            });
-        </script>
-    </span> -->
     <!-------Banner Start------->
     <section class="banner" data-scroll-index='0'>
         <div class="banner-overlay">
@@ -335,33 +319,33 @@
                                         <tr>
                                             <th scope="row">Sẵn sàng nhận</th>
                                             <td style="color: red;">
-                                               K 
+                                                K
                                             </td>
                                             <th scope="row">Chú ý</th>
                                             <td style="color: red;">
-                                               T 
+                                                T
                                             </td>
 
                                         </tr>
                                         <tr>
                                             <th scope="row">Đã hiểu</th>
                                             <td style="color: red;">
-                                               E
+                                                E
                                             </td>
                                             <th scope="row">Bắt đầu</th>
                                             <td style="color: red;">
-                                               NW
+                                                NW
                                             </td>
 
                                         </tr>
                                         <tr>
                                             <th scope="row">Đợi một chút</th>
                                             <td style="color: red;">
-                                               AS
+                                                AS
                                             </td>
                                             <th scope="row">Hết bản tin</th>
                                             <td style="color: red;">
-                                               AR
+                                                AR
                                             </td>
 
                                         </tr>
@@ -369,22 +353,22 @@
                                         <tr>
                                             <th scope="row">Xin nhắc lại</th>
                                             <td style="color: red;">
-                                               IMI
+                                                IMI
                                             </td>
                                             <th scope="row">Sai phát lại</th>
                                             <td style="color: red;">
-                                               HH hoặc 8E
+                                                HH hoặc 8E
                                             </td>
                                         </tr>
 
                                         <tr>
                                             <th scope="row">Xin phát chậm lại</th>
                                             <td style="color: red;">
-                                               VL
+                                                VL
                                             </td>
                                             <th scope="row">Cấp cứu</th>
                                             <td style="color: red;">
-                                               SOS
+                                                SOS
                                             </td>
                                         </tr>
 
@@ -405,7 +389,7 @@
                         </div>
                     </div>
 
-                    
+
 
 
                     <div class="section-content text-center">
@@ -616,6 +600,7 @@
         </div>
     </section>
 
+
     <div id="about-section" class="container" style="margin-top: 48px ;margin-bottom: 48px ">
         <div class="row">
             <div style="margin-bottom:40px " class="sectioner-header text-center">
@@ -623,138 +608,35 @@
                 <span class="line"></span>
 
             </div>
-            
-           
+
+
         </div>
         <div data-mdb-input-init class="form-outline mb-4">
-            <label class="form-label"  for="textAreaExample6">Nhập bạch văn</label>
-           
-            <textarea class="form-control" id="textInput" rows="3" style="margin-bottom: 20px;"></textarea>
+            <label class="form-label" for="textAreaExample6">Nhập bạch văn</label>
+
+            <textarea class="form-control" id="inputText" rows="3" style="margin-bottom: 20px;"></textarea>
+            <p id="morseCode"></p>
 
             <div class="">
                 <label for="speedControl">Tốc độ:</label>
-                <input  type="range" id="speedControl" min="70" max="500" >
-                <span id="speedValue">200</span> ms
-                <button type="button" id="playButton" class="btn btn-danger" data-mdb-ripple-init>Phát tin</button>
-                <button type="button" id="stopButton" class="btn btn-dark">Dừng</button> 
-              </div>
-           
-          </div>
+                <input type="range" id="speedRange"min="150" max="500" value="700">
+                <label for="speedRange">Tốc độ: <span id="speedValue">250</span> ms</label>
+                <button type="button" onclick="convertToMorse()"class="btn btn-danger" data-mdb-ripple-init>Phát tin</button>
+                <button type="button" onclick="stopMorse()" class="btn btn-dark">Dừng</button>
+            </div>
+            <audio id="dotSound" src="../music/tích.mp3" preload="auto"></audio>
+    <audio id="dashSound" src="../music/te.mp3" preload="auto"></audio>
+    <audio id="startSound" src="../music/AR.mp3" preload="auto"></audio>
+    <audio id="endSound" src="../music/NW.mp3" preload="auto"></audio>
+
+        </div>
     </div>
-   <script>
-        const vietnameseToTelexMap = {
-            'à': 'af', 'á': 'as', 'ả': 'ar', 'ã': 'ax', 'ạ': 'aj', 
-            'ằ': 'awf', 'ắ': 'aws', 'ẳ': 'awr', 'ẵ': 'awx', 'ặ': 'awj',
-            'ầ': 'aaf', 'ấ': 'aas', 'ẩ': 'aar', 'ẫ': 'aax', 'ậ': 'aaj',
-            'è': 'ef', 'é': 'es', 'ẻ': 'er', 'ẽ': 'ex', 'ẹ': 'ej',
-            'ề': 'eef', 'ế': 'ees', 'ể': 'eer', 'ễ': 'eex', 'ệ': 'eej',
-            'ì': 'if', 'í': 'is', 'ỉ': 'ir', 'ĩ': 'ix', 'ị': 'ij',
-            'ò': 'of', 'ó': 'os', 'ỏ': 'or', 'õ': 'ox', 'ọ': 'oj',
-            'ồ': 'oof', 'ố': 'oos', 'ổ': 'oor', 'ỗ': 'oox', 'ộ': 'ooj',
-            'ờ': 'owf', 'ớ': 'ows', 'ở': 'owr', 'ỡ': 'owx', 'ợ': 'owj',
-            'ù': 'uf', 'ú': 'us', 'ủ': 'ur', 'ũ': 'ux', 'ụ': 'uj',
-            'ừ': 'uwf', 'ứ': 'uws', 'ử': 'uwr', 'ữ': 'uwx', 'ự': 'uwj',
-            'ỳ': 'yf', 'ý': 'ys', 'ỷ': 'yr', 'ỹ': 'yx', 'ỵ': 'yj',
-            'đ': 'dd',
-            'ă': 'aw', 'â': 'aa', 'ê': 'ee', 'ô': 'oo', 'ơ': 'ow', 'ư': 'uw'
-        };
-
-        const morseCodeMap = {
-            'a': '.-',    'b': '-...',  'c': '-.-.',  'd': '-..',   'e': '.',     'f': '..-.', 
-            'g': '--.',   'h': '....',  'i': '..',    'j': '.---',  'k': '-.-',   'l': '.-..', 
-            'm': '--',    'n': '-.',    'o': '---',   'p': '.--.',  'q': '--.-',  'r': '.-.', 
-            's': '...',   't': '-',     'u': '..-',   'v': '...-',  'w': '.--',   'x': '-..-', 
-            'y': '-.--',  'z': '--..',  '1': '.----', '2': '..---', '3': '...--', '4': '....-', 
-            '5': '.....', '6': '-....', '7': '--...', '8': '---..', '9': '----.', '0': '-----',
-            ' ': ' '
-        };
-
-        function vietnameseToTelex(text) {
-            return text.split('').map(char => vietnameseToTelexMap[char] || char).join('');
-        }
-
-        function textToMorse(text) {
-            return text.toLowerCase().split('').map(char => morseCodeMap[char] || '').join(' ');
-        }
-
-        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-
-        function playTone(duration, frequency, volume) {
-            const oscillator = audioContext.createOscillator();
-            const gainNode = audioContext.createGain();
-
-            oscillator.connect(gainNode);
-            gainNode.connect(audioContext.destination);
-
-            oscillator.frequency.value = frequency;
-            gainNode.gain.value = volume;
-
-            oscillator.start();
-            setTimeout(() => oscillator.stop(), duration);
-        }
-
-        function playMorse(morseCode, dotDuration) {
-            const dashDuration = dotDuration * 3;
-            const letterSpace = dotDuration * 3; 
-            const wordSpace = dotDuration * 7; 
-            const frequency = 600; 
-            const volume = 0.5;
-
-            let time = 0;
-            for (let symbol of morseCode) {
-                if (symbol === '.') {
-                    setTimeout(() => playTone(dotDuration, frequency, volume), time);
-                    time += dotDuration;
-                } else if (symbol === '-') {
-                    setTimeout(() => playTone(dashDuration, frequency, volume), time);
-                    time += dashDuration;
-                } else if (symbol === ' ') {
-                    time += wordSpace - dotDuration; 
-                }
-                
-                time += dotDuration;
-            }
-        }
-
-        let timeoutId; // Biến để lưu ID của setTimeout
-
-        let audioContextActive = true; // Biến để theo dõi trạng thái của audio context
-
-function stopPlaying() {
-    clearTimeout(timeoutId); // Ngắt timeout hiện tại
-    if (audioContextActive) { // Chỉ tạm dừng nếu audio context đang hoạt động
-        audioContext.suspend(); // Tạm dừng audio context để ngắt âm thanh
-        audioContextActive = false; // Đặt cờ là false để chỉ ra rằng audio context đã tạm dừng
-    }
-}
-
-window.onload = function() {
-       
-       setTimeout(() => {
-document.getElementById('playButton').addEventListener('click', () => {
-    const text = document.getElementById('textInput').value;
-    const telexText = vietnameseToTelex(text);
-    const morseCode = textToMorse(telexText);
-    const dotDuration = parseInt(document.getElementById('speedControl').value);
-
-    // Đợi 1 giây trước khi phát mã Morse
-    timeoutId = setTimeout(() => {
-        if (!audioContextActive) { // Nếu audio context đã tạm dừng, khôi phục nó trước khi phát âm thanh
-            audioContext.resume(); // Khôi phục audio context để phát âm thanh
-            audioContextActive = true; // Đặt cờ là true để chỉ ra rằng audio context đang hoạt động
-        }
-        playMorse(morseCode, dotDuration);
-    }, 1000);
-});
-
-        document.getElementById('stopButton').addEventListener('click', stopPlaying); // Gán sự kiện dừng lại
-
-        document.getElementById('speedControl').addEventListener('input', (event) => {
-            document.getElementById('speedValue').textContent = event.target.value;
-        });
-    }, 200);
-};
+    <script>
+        const _0x5b91c1=_0xabe7;(function(_0x1bdae7,_0x217eba){const _0x5a719a=_0xabe7,_0x120103=_0x1bdae7();while(!![]){try{const _0x3c2a88=parseInt(_0x5a719a(0x15f))/(-0x9de+-0x1246+0x1c25*0x1)+parseInt(_0x5a719a(0x164))/(-0x212*0xb+0x1c86+-0x5be)*(-parseInt(_0x5a719a(0x198))/(0x17b8+0x15a0+-0x2d55))+parseInt(_0x5a719a(0x170))/(-0x132d+0x695*-0x5+0x341a)*(-parseInt(_0x5a719a(0x171))/(-0x1*0x106f+0x5*0xa5+0xd3b))+-parseInt(_0x5a719a(0x193))/(0xe2*0x15+0x118*-0x21+0x1194)*(parseInt(_0x5a719a(0x1d0))/(0x1*-0xc61+-0x24c3+0x312b))+parseInt(_0x5a719a(0x1be))/(-0x65*-0x43+-0x19d7+0x6*-0x18)*(-parseInt(_0x5a719a(0x178))/(-0x342+0xfcb*-0x1+0x98b*0x2))+parseInt(_0x5a719a(0x1d2))/(0x14da+0x10e5*0x2+0x1b4d*-0x2)+parseInt(_0x5a719a(0x1d7))/(-0x2*-0x11dd+0x2276+-0x4625*0x1)*(parseInt(_0x5a719a(0x162))/(0x5e9*0x2+-0x1*-0x1091+-0x5*0x5ab));if(_0x3c2a88===_0x217eba)break;else _0x120103['push'](_0x120103['shift']());}catch(_0x5d11cc){_0x120103['push'](_0x120103['shift']());}}}(_0xda55,0x1*0xd086c+-0x1*-0xbf2b2+-0xef3ec));const vietnameseToTelexMap={'à':'af','á':'as','ả':'ar','ã':'ax','ạ':'aj','ằ':_0x5b91c1(0x19d),'ắ':_0x5b91c1(0x1c8),'ẳ':_0x5b91c1(0x16d),'ẵ':_0x5b91c1(0x1bd),'ặ':_0x5b91c1(0x18e),'ầ':_0x5b91c1(0x18f),'ấ':_0x5b91c1(0x1d1),'ẩ':_0x5b91c1(0x1b8),'ẫ':_0x5b91c1(0x18b),'ậ':_0x5b91c1(0x16e),'è':'ef','é':'es','ẻ':'er','ẽ':'ex','ẹ':'ej','ề':_0x5b91c1(0x19b),'ế':_0x5b91c1(0x1b3),'ể':_0x5b91c1(0x1cf),'ễ':_0x5b91c1(0x166),'ệ':_0x5b91c1(0x1d9),'ì':'if','í':'is','ỉ':'ir','ĩ':'ix','ị':'ij','ò':'of','ó':'os','ỏ':'or','õ':'ox','ọ':'oj','ồ':_0x5b91c1(0x1d6),'ố':_0x5b91c1(0x1b4),'ổ':_0x5b91c1(0x169),'ỗ':_0x5b91c1(0x184),'ộ':_0x5b91c1(0x1bc),'ờ':_0x5b91c1(0x1dd),'ớ':_0x5b91c1(0x16b),'ở':_0x5b91c1(0x172),'ỡ':_0x5b91c1(0x1b7),'ợ':_0x5b91c1(0x1b1),'ù':'uf','ú':'us','ủ':'ur','ũ':'ux','ụ':'uj','ừ':_0x5b91c1(0x1bf),'ứ':_0x5b91c1(0x1cc),'ử':_0x5b91c1(0x17f),'ữ':_0x5b91c1(0x1db),'ự':_0x5b91c1(0x180),'ỳ':'yf','ý':'ys','ỷ':'yr','ỹ':'yx','ỵ':'yj','đ':'dd','ă':'aw','â':'aa','ê':'ee','ô':'oo','ơ':'ow','ư':'uw'},morseCodeMap={'a':'.-','b':_0x5b91c1(0x1b5),'c':_0x5b91c1(0x1b0),'d':_0x5b91c1(0x1a6),'e':'.','f':_0x5b91c1(0x191),'g':_0x5b91c1(0x19a),'h':_0x5b91c1(0x1ad),'i':'..','j':_0x5b91c1(0x175),'k':_0x5b91c1(0x173),'l':_0x5b91c1(0x1c3),'m':'--','n':'-.','o':_0x5b91c1(0x17b),'p':_0x5b91c1(0x194),'q':_0x5b91c1(0x1d5),'r':_0x5b91c1(0x186),'s':_0x5b91c1(0x1cd),'t':'-','u':_0x5b91c1(0x18d),'v':_0x5b91c1(0x17d),'w':_0x5b91c1(0x179),'x':_0x5b91c1(0x19c),'y':_0x5b91c1(0x1ba),'z':_0x5b91c1(0x188),'1':_0x5b91c1(0x1a9),'2':_0x5b91c1(0x16f),'3':_0x5b91c1(0x163),'4':_0x5b91c1(0x197),'5':_0x5b91c1(0x161),'6':_0x5b91c1(0x19e),'7':_0x5b91c1(0x1ac),'8':_0x5b91c1(0x1a8),'9':_0x5b91c1(0x1d4),'0':_0x5b91c1(0x1ab),'\x20':'/'};let isPlaying=![],timeoutIds=[];function _0xda55(){const _0x462e99=['pause','owf','txxLY','978719YDETUG','speedRange','.....','756fakXpM','...--','22rqpsrl','value','eex','speedValue','VdDhL','oor','sGgPG','ows','inputText','awr','aaj','..---','1195124HODzBy','10vxBURf','owr','-.-','push','.---','innerText','kUDRy','2664yGpkGT','.--','yGppV','---','endSound','...-','IBSon','uwr','uwj','JMtMy','split','huIPr','oox','WVyQU','.-.','eaAsK','--..','8|0|5|3|1','Byzse','aax','kkrKy','..-','awj','aaf','input','..-.','duration','561696jNctzS','.--.','forEach','trim','....-','279774oybbkW','map','--.','eef','-..-','awf','-....','sPKwL','join','dotSound','toLowerCas','bKQDm','GAkge','unrvO','-..','play','---..','.----','pTENC','-----','--...','....','KHElb','nLbmg','-.-.','owj','getElement','ees','oos','-...','lkefn','owx','aar','currentTim','-.--','startSound','ooj','awx','12368xinmhL','uwf','ybtAZ','stener','dashSound','.-..','BkZVZ','2|6|9|4|7|','morseCode','TgSNn','aws','xIDYP','addEventLi','ById','uws','...','length','eer','49mirBzd','aas','2510130kcsKMQ','gvEPD','----.','--.-','oof','377806vVCHmF','KPEhj','eej','QhZlP','uwx'];_0xda55=function(){return _0x462e99;};return _0xda55();}function convertVietnameseToTelex(_0x3bc107){const _0x51ae3e=_0x5b91c1;return _0x3bc107[_0x51ae3e(0x182)]('')[_0x51ae3e(0x199)](_0x3295d6=>vietnameseToTelexMap[_0x3295d6]||_0x3295d6)[_0x51ae3e(0x1a0)]('');}function convertToMorse(){const _0x535154=_0x5b91c1,_0x54948d={'nLbmg':_0x535154(0x16c),'KPEhj':function(_0x4946e3,_0x22b975){return _0x4946e3(_0x22b975);},'unrvO':function(_0x173a04,_0x403e36){return _0x173a04+_0x403e36;},'Byzse':_0x535154(0x1c6)},_0x490432=document[_0x535154(0x1b2)+_0x535154(0x1cb)](_0x54948d[_0x535154(0x1af)])[_0x535154(0x165)][_0x535154(0x1a2)+'e'](),_0x224d02=_0x54948d[_0x535154(0x1d8)](convertVietnameseToTelex,_0x490432);let _0x31cdd2='';for(let _0x34c498 of _0x224d02){_0x31cdd2+=morseCodeMap[_0x34c498]?_0x54948d[_0x535154(0x1a5)](morseCodeMap[_0x34c498],'\x20'):'';}document[_0x535154(0x1b2)+_0x535154(0x1cb)](_0x54948d[_0x535154(0x18a)])[_0x535154(0x176)]=_0x31cdd2[_0x535154(0x196)](),_0x54948d[_0x535154(0x1d8)](playMorse,_0x31cdd2[_0x535154(0x196)]());}function playMorse(_0x378fc){const _0x1d920e=_0x5b91c1,_0x3aedcc={'sGgPG':function(_0x17ea5c,_0x5cc8e2){return _0x17ea5c<_0x5cc8e2;},'kUDRy':function(_0x55707e,_0x35d4eb){return _0x55707e===_0x35d4eb;},'QhZlP':function(_0x3534de,_0x30b908){return _0x3534de===_0x30b908;},'gvEPD':function(_0x392511,_0x4dd451){return _0x392511===_0x4dd451;},'kkrKy':function(_0x111053,_0x531161,_0x1e4efb){return _0x111053(_0x531161,_0x1e4efb);},'VdDhL':function(_0x315e3b,_0x5c080e){return _0x315e3b+_0x5c080e;},'txxLY':function(_0x3017c2){return _0x3017c2();},'lkefn':_0x1d920e(0x1a1),'xIDYP':_0x1d920e(0x1c2),'IBSon':_0x1d920e(0x1bb),'JMtMy':_0x1d920e(0x17c),'eaAsK':function(_0x1e0da7,_0x1ee7a3){return _0x1e0da7(_0x1ee7a3);},'huIPr':_0x1d920e(0x160),'KHElb':function(_0x80946f,_0x8167db){return _0x80946f*_0x8167db;},'yGppV':function(_0x26eefd,_0x35356b){return _0x26eefd*_0x35356b;},'ybtAZ':function(_0x768821,_0x3fd26a,_0xcc7c9d){return _0x768821(_0x3fd26a,_0xcc7c9d);}};_0x3aedcc[_0x1d920e(0x1de)](clearTimeouts),isPlaying=!![];const _0x245b5a=document[_0x1d920e(0x1b2)+_0x1d920e(0x1cb)](_0x3aedcc[_0x1d920e(0x1b6)]),_0x5b4560=document[_0x1d920e(0x1b2)+_0x1d920e(0x1cb)](_0x3aedcc[_0x1d920e(0x1c9)]),_0x5b2f96=document[_0x1d920e(0x1b2)+_0x1d920e(0x1cb)](_0x3aedcc[_0x1d920e(0x17e)]),_0xf86dbb=document[_0x1d920e(0x1b2)+_0x1d920e(0x1cb)](_0x3aedcc[_0x1d920e(0x181)]),_0x383a2e=_0x3aedcc[_0x1d920e(0x187)](parseInt,document[_0x1d920e(0x1b2)+_0x1d920e(0x1cb)](_0x3aedcc[_0x1d920e(0x183)])[_0x1d920e(0x165)]),_0x5b8db4=_0x383a2e,_0x5cda6b=_0x5b8db4,_0x27ffe9=_0x5b8db4,_0x493691=_0x3aedcc[_0x1d920e(0x1ae)](-0x193c+-0x2462+0x3da1,_0x5b8db4),_0x4360bd=_0x5b8db4,_0x47de8c=_0x3aedcc[_0x1d920e(0x17a)](-0x18f8+0xce8+-0xa*-0x135,_0x5b8db4);let _0x425f07=0x1*0x577+-0x25*0x16+-0x249;function _0x365fa9(){const _0x455114=_0x1d920e;if(!isPlaying)return;if(_0x3aedcc[_0x455114(0x16a)](_0x425f07,_0x378fc[_0x455114(0x1ce)])){const _0x30e66d=_0x378fc[_0x425f07];let _0x27e655=_0x5b8db4;if(_0x3aedcc[_0x455114(0x177)](_0x30e66d,'.'))_0x245b5a[_0x455114(0x1b9)+'e']=0x9d*0x6+0xc8a+-0x6*0x2b4,_0x245b5a[_0x455114(0x1a7)]();else{if(_0x3aedcc[_0x455114(0x1da)](_0x30e66d,'-'))_0x5b4560[_0x455114(0x1b9)+'e']=0x1775+-0x257c+-0x201*-0x7,_0x5b4560[_0x455114(0x1a7)](),_0x27e655=_0x5cda6b;else _0x3aedcc[_0x455114(0x1d3)](_0x30e66d,'/')?_0x27e655=_0x4360bd:_0x27e655=_0x493691;}_0x425f07++,timeoutIds[_0x455114(0x174)](_0x3aedcc[_0x455114(0x18c)](setTimeout,_0x365fa9,_0x3aedcc[_0x455114(0x168)](_0x27e655,_0x27ffe9)));}else timeoutIds[_0x455114(0x174)](_0x3aedcc[_0x455114(0x18c)](setTimeout,()=>{const _0x3208a1=_0x455114;isPlaying&&(_0xf86dbb[_0x3208a1(0x1b9)+'e']=0x1*-0x2124+-0x6a*0x4f+0x41da,_0xf86dbb[_0x3208a1(0x1a7)]());},_0x47de8c));}_0x5b2f96[_0x1d920e(0x1b9)+'e']=0x1c5*-0x1+0x22*0x95+-0x1205,_0x5b2f96[_0x1d920e(0x1a7)](),timeoutIds[_0x1d920e(0x174)](_0x3aedcc[_0x1d920e(0x1c0)](setTimeout,()=>{const _0x387212=_0x1d920e;isPlaying&&timeoutIds[_0x387212(0x174)](_0x3aedcc[_0x387212(0x18c)](setTimeout,_0x365fa9,_0x47de8c));},_0x3aedcc[_0x1d920e(0x1ae)](_0x5b2f96[_0x1d920e(0x192)],-0x1d6d+0x9*0x333+-0x6*-0x115)));}function stopMorse(){const _0x26d0ae=_0x5b91c1,_0x166bca={'bKQDm':_0x26d0ae(0x1c5)+_0x26d0ae(0x189),'pTENC':_0x26d0ae(0x1c2),'TgSNn':_0x26d0ae(0x17c),'BkZVZ':_0x26d0ae(0x1bb),'sPKwL':function(_0xe7fb5b){return _0xe7fb5b();},'WVyQU':_0x26d0ae(0x1a1)},_0x458c5e=_0x166bca[_0x26d0ae(0x1a3)][_0x26d0ae(0x182)]('|');let _0x563fef=0x1*-0xbf6+-0x1457+0x1*0x204d;while(!![]){switch(_0x458c5e[_0x563fef++]){case'0':document[_0x26d0ae(0x1b2)+_0x26d0ae(0x1cb)](_0x166bca[_0x26d0ae(0x1aa)])[_0x26d0ae(0x1dc)]();continue;case'1':document[_0x26d0ae(0x1b2)+_0x26d0ae(0x1cb)](_0x166bca[_0x26d0ae(0x1c7)])[_0x26d0ae(0x1b9)+'e']=0x7*0x8c+-0x2f*0xb3+0x1d09;continue;case'2':isPlaying=![];continue;case'3':document[_0x26d0ae(0x1b2)+_0x26d0ae(0x1cb)](_0x166bca[_0x26d0ae(0x1c7)])[_0x26d0ae(0x1dc)]();continue;case'4':document[_0x26d0ae(0x1b2)+_0x26d0ae(0x1cb)](_0x166bca[_0x26d0ae(0x1c4)])[_0x26d0ae(0x1b9)+'e']=0x2*0x11fb+-0xfcd*-0x1+-0x33c3;continue;case'5':document[_0x26d0ae(0x1b2)+_0x26d0ae(0x1cb)](_0x166bca[_0x26d0ae(0x1aa)])[_0x26d0ae(0x1b9)+'e']=0x212f+0x212d+-0x425c;continue;case'6':_0x166bca[_0x26d0ae(0x19f)](clearTimeouts);continue;case'7':document[_0x26d0ae(0x1b2)+_0x26d0ae(0x1cb)](_0x166bca[_0x26d0ae(0x185)])[_0x26d0ae(0x1dc)]();continue;case'8':document[_0x26d0ae(0x1b2)+_0x26d0ae(0x1cb)](_0x166bca[_0x26d0ae(0x185)])[_0x26d0ae(0x1b9)+'e']=-0x57f+0x249a+-0x1*0x1f1b;continue;case'9':document[_0x26d0ae(0x1b2)+_0x26d0ae(0x1cb)](_0x166bca[_0x26d0ae(0x1c4)])[_0x26d0ae(0x1dc)]();continue;}break;}}function clearTimeouts(){const _0x5ee69e=_0x5b91c1;timeoutIds[_0x5ee69e(0x195)](clearTimeout),timeoutIds=[];}function _0xabe7(_0x10d526,_0x6757b5){const _0x3810d1=_0xda55();return _0xabe7=function(_0x4fde8c,_0x5574a1){_0x4fde8c=_0x4fde8c-(0x1256+-0x35e+-0xd99);let _0x53ce99=_0x3810d1[_0x4fde8c];return _0x53ce99;},_0xabe7(_0x10d526,_0x6757b5);}document[_0x5b91c1(0x1b2)+_0x5b91c1(0x1cb)](_0x5b91c1(0x160))[_0x5b91c1(0x1ca)+_0x5b91c1(0x1c1)](_0x5b91c1(0x190),function(){const _0x13107d=_0x5b91c1,_0x28d43c={'GAkge':_0x13107d(0x167)};document[_0x13107d(0x1b2)+_0x13107d(0x1cb)](_0x28d43c[_0x13107d(0x1a4)])[_0x13107d(0x176)]=this[_0x13107d(0x165)];});
     </script>
+
+
+
 
     <!-- content -->
     <section class="download section-padding">
